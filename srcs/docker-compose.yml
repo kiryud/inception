@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+    mariadb:
+        image: mariadb
+        restart: always
+        expose:
+            - "3306"
+        volumes:
+            db_volume:/var/lib/mysql
+        networks:
+            - intra
+        env_file:
+            - .env
+    wordpress:
+        image: wordpress
+        depends_on:
+            - mariadb
+        restart: always
+        volumes:
+            - wp_volume:/var/www/html
+        expose: 
+            - "9000"
+        networks:
+            - intra
+        env_file:
+            - .env
+    nginx:
+        image: nginx
+        depends_on:
+            - wordpress
+        restart: always
+        ports:
+            - "443:443"
+        volumes:
+            - wp_volume:/var/www/html
+        networks:
+            - intra
+        env_file:
+            - .env
+
+networks:
+    intra:
+        driver: bridge
+
+volumes:
+    db_volume:
+            type: none
+            device: ~/volume/db
+            o: bind
+    wp_volume:
+        driver_opts:
+            type: none
+            device: ~/volume/wp
+            o: bind

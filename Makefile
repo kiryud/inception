@@ -10,4 +10,27 @@
 #                                                                              #
 # **************************************************************************** #
 
+all: up
 
+ps:
+	docker-compose -f ./srcs/docker-compose.yml ps
+
+
+up: volume
+	docker-compose -f ./srcs/docker-compose.yml up
+
+down:
+	docker-compose -f ./srcs/docker-compose.yml down
+
+re:
+	make fclean
+	make up
+
+fclean:
+	rm -fr ~/volume
+
+volume:
+	mkdir -p ~/volume/wp
+	mkdir -p ~/volume/db
+
+.PHONY: on off re fclean env
