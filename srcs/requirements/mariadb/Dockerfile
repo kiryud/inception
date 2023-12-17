@@ -1,7 +1,9 @@
 FROM alpine
 
-RUN apk update && apk add --no-cache mysql mysql-client
+RUN apk update && apk add --no-cache mariadb-server
 
 COPY ./tools/init.sh ./init.sh
 
-ENTRYPOINT [ "sh", "/tmp/init.sh" ]
+CMD ["sh", "/tmp/init.sh"]
+
+ENTRYPOINT ["mariadb"]
