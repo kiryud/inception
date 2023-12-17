@@ -1,7 +1,7 @@
 FROM alpine
 
-RUN apk update && apk add --no-cache neofetch
+RUN apk update && apk add --no-cache mysql mysql-client
 
 COPY ./tools/init.sh ./init.sh
 
-CMD [ "neofetch". "", "" ]
+ENTRYPOINT [ "sh", "/tmp/init.sh" ]
