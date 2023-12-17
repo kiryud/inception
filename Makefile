@@ -13,14 +13,14 @@
 all: up
 
 ps:
-	docker-compose -f ./srcs/docker-compose.yml ps
+	@docker-compose -f ./srcs/docker-compose.yml ps
 
 
 up: volume
-	docker-compose -f ./srcs/docker-compose.yml up
+	@docker-compose -f ./srcs/docker-compose.yml up
 
 down:
-	docker-compose -f ./srcs/docker-compose.yml down
+	@docker-compose -f ./srcs/docker-compose.yml down
 
 re:
 	make fclean
