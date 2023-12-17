@@ -48,13 +48,13 @@ networks:
 
 volumes:
     db_volume:
-        driver: none
+        driver: local
         driver_opts:
             type: none
             device: ~/volume/db
             o: bind
     wp_volume:
-        driver: none
+        driver: local
         driver_opts:
             type: none
             device: ~/volume/wp
