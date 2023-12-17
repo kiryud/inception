@@ -8,7 +8,7 @@ services:
         expose:
             - "3306"
         volumes:
-            - db:/var/lib/mysql
+            - db_volume:/var/lib/mysql
         networks:
             - intra
         env_file:
@@ -20,7 +20,7 @@ services:
             - mariadb
         restart: always
         volumes:
-            - wp:/var/www/html
+            - wp_volume:/var/www/html
         expose: 
             - "9000"
         networks:
@@ -36,7 +36,7 @@ services:
         ports:
             - "443:443"
         volumes:
-            - wp:/var/www/html
+            - wp_volume:/var/www/html
         networks:
             - intra
         env_file:
@@ -48,14 +48,12 @@ networks:
 
 volumes:
     db_volume:
-        name: db
         driver: local
         driver_opts:
             type: none
             device: ~/volume/db
             o: bind
     wp_volume:
-        name: wp
         driver: local
         driver_opts:
             type: none
