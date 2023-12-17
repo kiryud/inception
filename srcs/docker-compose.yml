@@ -55,7 +55,7 @@ volumes:
             device: ~/volume/db
             o: bind
     wp_volume:
-        name: db
+        name: wp
         driver: local
         driver_opts:
             type: none
