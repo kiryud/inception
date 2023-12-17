@@ -13,21 +13,22 @@
 all: up
 
 ps:
-	@docker-compose -f ./srcs/docker-compose.yml ps
+	docker-compose -f ./srcs/docker-compose.yml ps
 
 
 up: volume
-	@docker-compose -f ./srcs/docker-compose.yml up
+	docker-compose -f ./srcs/docker-compose.yml up
 
 down:
-	@docker-compose -f ./srcs/docker-compose.yml down -v
+	docker-compose -f ./srcs/docker-compose.yml down -v
 
 re:
 	make fclean
 	make up
 
 fclean:
-	@docker-compose -f ./srcs/docker-compose.yml down -v
+	docker-compose -f ./srcs/docker-compose.yml down
+	docker volume prune
 	rm -fr ~/volume
 
 volume:
