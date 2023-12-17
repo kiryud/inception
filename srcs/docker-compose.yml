@@ -3,6 +3,7 @@ version: '3'
 services:
     mariadb:
         image: mariadb
+        build: ./requirements/mariadb
         restart: always
         expose:
             - "3306"
@@ -14,6 +15,7 @@ services:
             - .env
     wordpress:
         image: wordpress
+        build: ./requirements/wordpress
         depends_on:
             - mariadb
         restart: always
@@ -27,6 +29,7 @@ services:
             - .env
     nginx:
         image: nginx
+        build: ./requirements/nginx
         depends_on:
             - wordpress
         restart: always
@@ -45,6 +48,7 @@ networks:
 
 volumes:
     db_volume:
+        driver_opts:
             type: none
             device: ~/volume/db
             o: bind
