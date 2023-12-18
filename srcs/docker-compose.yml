@@ -52,12 +52,12 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            device: ~/volume/db
+            device: /home/jijeong/volume/db
             o: bind
     wp_volume:
         name: wp_volume
         driver: local
         driver_opts:
             type: none
-            device: ~/volume/wp
+            device: /home/jijeong/volume/wp
             o: bind

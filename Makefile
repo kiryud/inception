@@ -29,10 +29,10 @@ re:
 fclean:
 	sudo docker-compose -f ./srcs/docker-compose.yml down -v
 	sudo docker volume prune
-	sudo rm -fr ~/volume
+	sudo rm -fr /home/jijeong/volume
 
 volume:
-	sudo mkdir -p ~/volume/wp
-	sudo mkdir -p ~/volume/db
+	sudo mkdir -p /home/jijeong/volume/wp
+	sudo mkdir -p /home/jijeong/volume/db
 
 .PHONY: on off re fclean env
