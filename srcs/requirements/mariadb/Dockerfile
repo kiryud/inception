@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk update && apk add --no-cache mariadb-server
+RUN apk update && apk add --no-cache mariadb
 
 COPY ./tools/init.sh ./init.sh
 
