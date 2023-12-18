@@ -3,6 +3,7 @@ version: '3'
 services:
     mariadb:
         image: mariadb
+        container_name: mariadb
         build: ./requirements/mariadb
         restart: always
         expose:
@@ -15,6 +16,7 @@ services:
             - .env
     wordpress:
         image: wordpress
+        container_name: wordpress
         build: ./requirements/wordpress
         depends_on:
             - mariadb
@@ -29,6 +31,7 @@ services:
             - .env
     nginx:
         image: nginx
+        container_name: nginx
         build: ./requirements/nginx
         depends_on:
             - wordpress
@@ -36,6 +39,8 @@ services:
         ports:
             - "443:443"
         volumes:
+            - ./requirements/nginx/conf/:/etc/nginx/http.d/
+            - ./requirements/nginx/tools:/etc/nginx/ssl/
             - wp_volume:/var/www/html
         networks:
             - intra

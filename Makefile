@@ -27,8 +27,10 @@ re:
 	sudo make up
 
 fclean:
-	sudo docker-compose -f ./srcs/docker-compose.yml down -v
-	sudo docker volume prune
+	docker stop $$(docker ps -qa)
+	docker system prune --all --force --volumes
+	docker network prune --force
+	docker volume prune --force
 	sudo rm -fr /home/jijeong/volume
 
 volume:
