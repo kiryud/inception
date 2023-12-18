@@ -1,7 +1,11 @@
 FROM alpine
 
-RUN apk update && apk add --no-cache 
+RUN apk update && apk add --no-cache nginx
 
-COPY ./tools/init.sh ./init.sh
+COPY ./tools/init.sh ./init.
 
-CMD [ "". "", "" ]
+RUN mkdir -p /run/nginx
+
+WORKDIR /var/www/html
+
+ENTRYPOINT ["nginx", "", ""]

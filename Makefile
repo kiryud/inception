@@ -13,26 +13,26 @@
 all: up
 
 ps:
-	docker-compose -f ./srcs/docker-compose.yml ps
+	sudo docker-compose -f ./srcs/docker-compose.yml ps
 
 
 up: volume
-	docker-compose -f ./srcs/docker-compose.yml up
+	sudo docker-compose -f ./srcs/docker-compose.yml up --build
 
 down:
-	docker-compose -f ./srcs/docker-compose.yml down -v
+	sudo docker-compose -f ./srcs/docker-compose.yml down -v
 
 re:
-	make fclean
-	make up
+	sudo make fclean
+	sudo make up
 
 fclean:
-	docker-compose -f ./srcs/docker-compose.yml down
-	docker volume prune
-	rm -fr ~/volume
+	sudo docker-compose -f ./srcs/docker-compose.yml down -v
+	sudo docker volume prune
+	sudo rm -fr ~/volume
 
 volume:
-	mkdir -p ~/volume/wp
-	mkdir -p ~/volume/db
+	sudo mkdir -p ~/volume/wp
+	sudo mkdir -p ~/volume/db
 
 .PHONY: on off re fclean env
