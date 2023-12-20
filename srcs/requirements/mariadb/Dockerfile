@@ -18,6 +18,4 @@ COPY ./tools/init.sh ./init.sh
 
 RUN sh init.sh && rm init.sh
 
-CMD ["sh", "/tmp/init.sh"]
-
-ENTRYPOINT ["/usr/bin/mariadbd"]
+CMD ["/usr/bin/mysqld", "--skip-log-error"]
