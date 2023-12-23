@@ -12,6 +12,3 @@ mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ADMIN_PASS}';"
 
 mysql -e "FLUSH PRIVILEGES;"
 
-mysqladmin -u root -p$MARIADB_ADMIN_PASS shutdown
-
-exec mysqld_safe
