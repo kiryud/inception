@@ -1,6 +1,6 @@
 FROM alpine:3.18
 
-RUN apk update && apk add --no-cache mariadb mariadb-client
+RUN apk update && apk add --no-cache mariadb mariadb-client openrc
 
 COPY ./tools/init.sh ./init.sh
 
