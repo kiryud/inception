@@ -1,8 +1,5 @@
 #! /bin/sh
 
-# datadir에 기본 셋업을 진행한다.
-/etc/init.d/mariadb setup
-
 service mysql start;
 
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${MARIADB_DATABASE_NAME}\`;"
