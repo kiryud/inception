@@ -7,6 +7,8 @@ RUN mkdir /var/run/mysqld; \
 
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
+RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+
 COPY ./tools/init.sh ./init.sh
 
 RUN sh init.sh && rm init.sh
