@@ -4,8 +4,6 @@ RUN apk update && apk add --no-cache mariadb mariadb-client
 
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf/
 
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
 COPY ./tools/init.sh ./init.sh
 
 RUN sh init.sh && rm init.sh
