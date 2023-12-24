@@ -9,14 +9,8 @@ COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
-RUN mysqld -e "CREATE DATABASE IF NOT EXISTS \`${MARIADB_DATABASE_NAME}\`;"
+COPY ./tools/init.sh ./init.sh
 
-RUN mysqld -e "CREATE USER IF NOT EXISTS \`${MARIADB_USER}\`@'localhost' IDENTIFIED BY '${MARIADB_PASS}';"
-
-RUN mysqld -e "GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE_NAME}\`.* TO \`${MARIADB_USER}\`@'%' IDENTIFIED BY '${MARIADB_PASS}';"
-
-RUN mysqld -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ADMIN_PASS}';"
-
-RUN mysqld -e "FLUSH PRIVILEGES;"
+RUN sh init.sh && rm init.sh
 
 CMD ["/usr/bin/mysqld", "--skip-log-error"]
