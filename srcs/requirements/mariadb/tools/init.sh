@@ -4,11 +4,19 @@ rc default
 
 /etc/init.d/mariadb setup
 
-rc-service mysql start
+rc-service mariadb start
 
-mysql -e "CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE_NAME;
-		CREATE USER IF NOT EXISTS $MARIADB_USER@localhost IDENTIFIED BY '$MARIADB_PASS';
-		GRANT ALL PRIVILEGES ON $MARIADB_DATABASE_NAME.* TO $MARIADB_USER@'%' IDENTIFIED BY '$MARIADB_PASS';
-		ALTER USER root@localhost IDENTIFIED BY '$MARIADB_ADMIN_PASS'; FLUSH PRIVILEGES;"
+mysql -e "CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE_NAME};"
 
-rc-service mysql stop
+mysql -e "CREATE USER IF NOT EXISTS ${MARIADB_USER}@'localhost' IDENTIFIED BY '${MARIADB_PASS}';"
+
+mysql -e "GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE_NAME}\`.* TO \`${MARIADB_USER}\`@'%' IDENTIFIED BY '${MARIADB_PASS}';"
+
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ADMIN_PASS}';"
+
+mysql -e "FLUSH PRIVILEGES;"
+
+mysqladmin -u root -p$MARIADB_ADMIN_PASS shutdown
+
+rc-service mariadb start
+
