@@ -4,7 +4,7 @@ rc default
 
 /etc/init.d/mariadb setup
 
-rc-service mariadb start
+rc-service mysql start
 
 mysql -e "CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE_NAME};"
 
@@ -18,5 +18,5 @@ mysql -e "FLUSH PRIVILEGES;"
 
 mysqladmin -u root -p '$MARIADB_ADMIN_PASS' shutdown
 
-rc-service mariadb start
+rc-service mysql start
 
