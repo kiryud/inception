@@ -23,21 +23,23 @@ build:
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
-	sudo docker-compose -f ./srcs/docker-compose.yml down -v
+	sudo docker-compose -f ./srcs/docker-compose.yml down
 
+clean:
+	sudo docker-compose -f ./srcs/docker-compose.yml down -v
 re:
 	sudo make fclean
 	sudo make up
 
 fclean:
-	docker stop $$(docker ps -qa)
-	docker system prune --all --force --volumes
-	docker network prune --force
-	docker volume prune --force
+	sudo make clean
+	sudo docker system prune --all --force --volumes
+	sudo docker network prune --force
+	sudo docker volume prune --force
 	sudo rm -fr /home/jijeong/volume
 
 volume:
 	sudo mkdir -p /home/jijeong/volume/wp
 	sudo mkdir -p /home/jijeong/volume/db
 
-.PHONY: on off re fclean env
+.PHONY: all ps up build down clean re fclean volume
