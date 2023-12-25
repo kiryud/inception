@@ -9,8 +9,4 @@ COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 COPY ./tools/init.sh ./init.sh
 
-RUN chmod 777 ./init.sh
-
-ENTRYPOINT [ "sh", "/init.sh" ]
-
-CMD ["/usr/bin/mysqld", "--skip-log-error"]
+CMD ["/init.sh"]
