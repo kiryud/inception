@@ -1,6 +1,6 @@
 #! /bin/sh
 rc default
-
+/etc/init.d/mariadb setup
 rc-service mariadb start
 
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${MARIADB_DATABASE_NAME}\`;"
