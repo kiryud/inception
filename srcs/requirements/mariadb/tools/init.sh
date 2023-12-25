@@ -6,12 +6,12 @@ rc default
 
 rc-service mariadb start
 
-mysql --skip-networking=false -e "CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE_NAME;"
-mysql --skip-networking=false -e "CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'localhost' IDENTIFIED BY '${MARIADB_PASS}';"
-mysql --skip-networking=false -e "GRANT ALL PRIVILEGES ON $MARIADB_DATABASE_NAME.* TO '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASS}';"
-mysql --skip-networking=false -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ADMIN_PASS}';"
+cat << EOF | mysql
+CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE_NAME};
+CREATE USER IF NOT EXISTS ${MARIADB_USER}@localhost IDENTIFIED BY '${MARIADB_PASS}';
+GRANT ALL PRIVILEGES ON ${MARIADB_DATABASE_NAME}.* TO ${MARIADB_USER}@% IDENTIFIED BY '${MARIADB_PASS}';
+ALTER USER root@localhost IDENTIFIED BY '${MARIADB_ADMIN_PASS}';
+FLUSH PRIVILEGES;
+EOF
 
-
-rc-service mariadb stop
-
-/usr/bin/mysqld_safe
+rc-service mariadb start
