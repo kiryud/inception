@@ -9,7 +9,7 @@ COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 COPY ./tools/init.sh ./init.sh
 
-RUN sh init.sh && rm init.sh
+RUN sh init.sh
 
 VOLUME ["/var/lib/mysql"]
 
