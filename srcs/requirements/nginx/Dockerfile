@@ -1,6 +1,6 @@
 FROM alpine:3.18
 
-RUN apk update && apk add --no-cache -y nginx openssl && \
+RUN apk update && apk add --no-cache nginx openssl && \
 	mkdir -p /etc/nginx/ssl && \
 	openssl req -x509 -nodes \
 	-out /etc/nginx/ssl/inception.crt \
