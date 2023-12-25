@@ -14,6 +14,4 @@ mysql -e "GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE_NAME}\`.* TO \`${MARIADB_
 
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ADMIN_PASS}'; FLUSH PRIVILEGES;"
 
-mysqladmin -u root -p$MARIADB_ADMIN_PASS shutdown
-
 rc-service mariadb stop
