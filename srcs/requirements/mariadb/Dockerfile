@@ -11,8 +11,6 @@ COPY ./tools/init.sh ./init.sh
 
 RUN chmod 777 ./init.sh
 
-RUN sh init.sh
-
-VOLUME ["/var/lib/mysql"]
+ENTRYPOINT [ "init.sh" ]
 
 CMD ["/usr/bin/mysqld", "--skip-log-error"]
