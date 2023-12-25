@@ -14,3 +14,4 @@ echo "mysql -uroot -e 'ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_AD
 
 rc-service mariadb stop
 
+/usr/bin/mysqld_safe
