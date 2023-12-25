@@ -11,4 +11,6 @@ COPY ./tools/init.sh ./init.sh
 
 RUN chmod 777 ./init.sh
 
-ENTRYPOINT [ "sh",  "/init.sh" ]
+ENTRYPOINT [ "sh", "/init.sh" ]
+
+CMD ["/usr/bin/mysqld", "--skip-log-error"]

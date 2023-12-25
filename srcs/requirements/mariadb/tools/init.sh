@@ -1,10 +1,6 @@
 #! /bin/sh
 
-rc default
-
 /etc/init.d/mariadb setup
-
-rc-service mariadb start
 
 cat << EOF > init.sql
 CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE_NAME};
@@ -15,5 +11,3 @@ FLUSH PRIVILEGES;
 EOF
 
 mariadbd -u root --bootstrap < init.sql
-
-rc-service mariadb start
