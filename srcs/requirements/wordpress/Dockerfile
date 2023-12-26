@@ -10,8 +10,12 @@ RUN apk update && apk upgrade && apk add --no-cache \
 		curl \
 		wget
 
-RUN sed -i "s/listen = 127.0.0.1:9000/listen = 9000/g" /etc/php81/php-fpm.d/www.conf
-RUN sed -i "s/;phar.readonly = On/phar.readonly = On/g" /etc/php81/php.ini
+RUN sed -i "s/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/g" /etc/php81/php-fpm.d/www.conf && \
+  echo "user = www-data" >> /etc/php81/php-fpm.d/www.conf &&\
+  echo "gruop = www-data" >> /etc/php81/php-fpm.d/www.conf &&\
+  echo "listen.owner = www-data" >> /etc/php81/php-fpm.d/www.conf &&\
+  echo "listen.group = www-data" >> /etc/php81/php-fpm.d/www.conf &&\
+  sed -i "s/;phar.readonly = On/phar.readonly = On/g" /etc/php81/php.ini
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
