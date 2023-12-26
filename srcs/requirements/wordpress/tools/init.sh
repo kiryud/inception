@@ -29,6 +29,4 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 		--role=author \
 		--user_pass=$WORDPRESS_PASS \
 		--allow-root
-fil
-
-/usr/sbin/php-fpm81 -F
+fi
