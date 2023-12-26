@@ -3,6 +3,7 @@ FROM alpine:3.18
 RUN apk update && apk upgrade && apk add --no-cache \
 		php81 \
 		php81-fpm\
+    php81-phar\
 		php81-mysqli\
 		mariadb-client \
 		fcgi \
