@@ -26,5 +26,4 @@ WORKDIR /var/www/html
 COPY ./tools/init.sh /init.sh
 RUN	chmod +x /init.sh
 
-ENTRYPOINT [ "/init.sh" ]
 CMD ["/usr/sbin/php-fpm81", "-F"]
