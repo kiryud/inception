@@ -12,6 +12,7 @@ RUN apk update && apk upgrade && apk add --no-cache \
 RUN adduser -S nginx && addgroup -S nginx
 
 RUN sed -i "s/listen = 127.0.0.1:9000/listen = 9000/g" /etc/php81/php-fpm.d/www.conf
+RUN sed -i "s/;phar.readonly = On/phar.readonly = On/g" /etc/php81/php-fpm.d/www.conf
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
@@ -24,7 +25,7 @@ RUN	mkdir -p /var/log/php-fpm && \
 	chown -R nginx:nginx /var/log/php-fpm && \
 	chmod -R 777 /var/log/php-fpm
 
-COPY ./tools/init.sh /tmp/init.sh
-RUN	chmod +x /tmp/init.sh
+COPY ./tools/init.sh /init.sh
+RUN	chmod +x /init.sh
 
-ENTRYPOINT ["sh", "/tmp/init.sh"]
+ENTRYPOINT ["sh", "/init.sh"]

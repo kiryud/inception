@@ -1,13 +1,10 @@
 #!bin/sh
 
-# Change the current directory to the WordPress installation directory
 cd /var/www/html
 
-# Check if the wp-config.php file already exists
 if [ ! -f "wp-config.php" ]; then
 	wp core download --allow-root
 
-	# Create a wp-config.php file with provided database configuration
 	wp config create \
 		--dbname=$MARIADB_DATABASE_NAME \
 		--dbuser=$MARIADB_USER \
@@ -17,7 +14,6 @@ if [ ! -f "wp-config.php" ]; then
 		--dbcollate="utf8_general_ci" \
 		--allow-root
 
-	# Install WordPress with provided setup information
 	wp core install \
 		--url=$DOMAIN_NAME \
 		--title="$WORDPRESS_TITLE" \
@@ -27,7 +23,6 @@ if [ ! -f "wp-config.php" ]; then
 		--skip-email \
 		--allow-root
 
-	# Create a new user with the specified role and credentials
 	wp user create \
 		$WORDPRESS_USER \
 		$WORDPRESS_MAIL \
