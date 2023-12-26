@@ -8,8 +8,7 @@ RUN apk update && apk add --no-cache nginx openssl && \
 	-subj "/C=FR/ST=IDF/L=Korea/O=42/OU=42/CN=jijeong.42.fr/UID=jijeong" && \
 	mkdir -p /run/nginx && \
 	mkdir -p /var/www/html && \
-	chmod 755 /var/www/html && \
-	chown -R www-data:www-data /var/www/html
+	chmod 755 /var/www/html &&
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
