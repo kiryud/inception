@@ -2,8 +2,8 @@
 
 cd /var/www/html
 
-if [ ! -f "wp-config.php" ]; then
-	wp core download --allow-root
+if [ ! -f "/var/www/html/wp-config.php" ]; then
+	wp core download --path=/var/www/html/ --allow-root
 
 	wp config create \
 		--dbname=$MARIADB_DATABASE_NAME \
