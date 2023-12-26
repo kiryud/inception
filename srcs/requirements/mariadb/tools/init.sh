@@ -1,19 +1,10 @@
 #! /bin/sh
 
-# Check if the /run/mysqld directory exists, and create it if not
-if [ ! -d "/run/mysqld" ]
-then
-	mkdir -p /run/mysqld
-	chown -R mysql:mysql /run/mysqld
-fi
-
-# Check if the /var/lib/mysql/mysql directory exists, and create it if not
 if [ ! -d "/var/lib/mysql/mysql" ]
 then
 	chown -R mysql:mysql /var/lib/mysql
 	mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
 
-	# Create a temporary file to execute SQL commands
 	tmp=`.tmp_init_db.sql`
 
 	if [ ! -f "$tmp" ]
@@ -21,7 +12,6 @@ then
 		return 1
 	fi
 
-	# Define SQL commands to set up MariaDB user and database
 cat << EOF > $tmp
 	USE mysql;
 	FLUSH PRIVILEGES;

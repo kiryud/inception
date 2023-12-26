@@ -21,9 +21,9 @@ RUN sed -i "s/;phar.readonly = On/phar.readonly = On/g" /etc/php81/php.ini
 
 RUN	wp core download --path=/var/www/html/ --allow-root
 
-WORKDIR /var/www/html
 
-COPY ./tools/init.sh /init.sh
-RUN	chmod +x /init.sh
+COPY ./tools/init.sh /var/www/html/init_wp_config_file.sh
+RUN	chmod +x /var/www/html/init_wp_config_file.sh
 
+ENTRYPOINT [ "/var/www/html/init_wp_config_file.sh" ]
 CMD ["/usr/sbin/php-fpm81", "-F"]
