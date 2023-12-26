@@ -3,13 +3,14 @@ FROM alpine:3.18
 RUN apk update && apk upgrade && apk add --no-cache \
 	php81 \
 	php81-fpm \
-  php81-phar \
+ 	php81-phar \
 	php81-mysqli \
 	mariadb-client \
 	fcgi \
 	curl \
 	wget && \
-  mkdir -p /var/log/php-fpm && \
+	mkdir -p /var/www/html && \
+	mkdir -p /var/log/php-fpm && \
 	chmod -R 777 /var/log/php-fpm
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
