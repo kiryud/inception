@@ -10,6 +10,6 @@ RUN apk update && apk add --no-cache nginx openssl && \
 	mkdir -p /var/www/html && \
 	chmod 755 /var/www/html
 
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 ENTRYPOINT ["nginx", "-g", "daemon off"]
