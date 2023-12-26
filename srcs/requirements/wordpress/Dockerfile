@@ -15,8 +15,10 @@ RUN apk update && apk upgrade && apk add --no-cache \
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp && \
-	chmod +x /usr/local/bin/wp &&\
-  wp core download --path=/var/www/html/ --allow-root
+	chmod +x /usr/local/bin/wp
+RUN sed -i "s/;phar.readonly = On/phar.readonly = On/g" /etc/php81/php.ini
+
+RUN	wp core download --path=/var/www/html/ --allow-root
 
 WORKDIR /var/www/html
 
