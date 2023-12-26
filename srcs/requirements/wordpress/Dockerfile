@@ -28,4 +28,5 @@ RUN	mkdir -p /var/log/php-fpm && \
 COPY ./tools/init.sh /init.sh
 RUN	chmod +x /init.sh
 
-CMD ["./init.sh"]
+ENTRYPOINT [ "/init.sh" ]
+CMD ["/usr/sbin/php-fpm81", "-F"]
