@@ -8,6 +8,6 @@ RUN apk update && apk add --no-cache nginx openssl && \
 	-subj "/C=FR/ST=IDF/L=Korea/O=42/OU=42/CN=jijeong.42.fr/UID=jijeong" && \
 	mkdir -p /run/nginx
 
-COPY ./conf/default.conf /etc/nginx/http.d/default.conf
+COPY ./conf/my.conf /etc/nginx/http.d/default.conf
 
 ENTRYPOINT ["nginx", "-g", "daemon off"]
