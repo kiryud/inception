@@ -1,20 +1,10 @@
 #!bin/sh
 
-# Wait until MariaDB is reachable before proceeding
-while ! mariadb -h $MARIADB_HOST -u $MARIADB_USER -p$MARIADB_PASS $MARIADB_DATABASE_NAME --silent; do
-	sleep 20
-done 
-
 # Change the current directory to the WordPress installation directory
 cd /var/www/html
 
 # Check if the wp-config.php file already exists
-if [ -f "wp-config.php" ]; then
-	echo "Wordpress already configured!"
-else
-	echo "Configuring Wordpress"
-
-	# Download WordPress core files
+if [ ! -f "wp-config.php" ]; then
 	wp core download --allow-root
 
 	# Create a wp-config.php file with provided database configuration

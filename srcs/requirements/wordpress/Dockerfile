@@ -4,14 +4,6 @@ RUN apk update && apk upgrade && apk add --no-cache \
 		php81 \
 		php81-fpm\
 		php81-mysqli\
-		php81-opcache\
-		php81-curl\
-		php81-mbstring\
-		php81-intl\
-		php81-xml\
-		php81-zip\
-		php81-openssl\
-		php81-phar\
 		mariadb-client \
 		fcgi \
 		curl \
