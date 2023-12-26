@@ -29,7 +29,6 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 		--role=author \
 		--user_pass=$WORDPRESS_PASS \
 		--allow-root
-fi
+fil
 
-# Start PHP-FPM service in foreground mode
 /usr/sbin/php-fpm81 -F
