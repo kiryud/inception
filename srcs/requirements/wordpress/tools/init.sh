@@ -1,5 +1,9 @@
 #!bin/sh
 
+while ! mariadb -h $MARIADB_HOST -u $MARIADB_USER -p$MARIADB_PASS $MARIADB_DATABASE_NAME --silent; do
+	sleep 20
+done 
+
 cd /var/www/html
 
 if [ ! -f "/var/www/html/wp-config.php" ]; then
