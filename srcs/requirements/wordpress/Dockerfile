@@ -24,4 +24,4 @@ RUN	mkdir -p /var/log/php-fpm && \
 COPY ./tools/init.sh /init.sh
 RUN	chmod +x /init.sh
 
-ENTRYPOINT ["sh", "/init.sh"]
+CMD ["./init.sh"]
