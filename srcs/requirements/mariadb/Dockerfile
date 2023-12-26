@@ -1,6 +1,6 @@
 FROM alpine:3.18
 
-RUN apk update && apk add --no-cache mariadb mariadb-client openrc
+RUN apk update && apk add --no-cache mariadb mariadb-client
 
 RUN mkdir /var/run/mysqld; \
     chmod 777 /var/run/mysqld;

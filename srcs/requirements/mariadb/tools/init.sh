@@ -14,7 +14,7 @@ then
 	mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
 
 	# Create a temporary file to execute SQL commands
-	tmp=`mktemp`
+	tmp=`.tmp_init_db.sql`
 
 	if [ ! -f "$tmp" ]
 	then
@@ -22,15 +22,14 @@ then
 	fi
 
 	# Define SQL commands to set up MariaDB user and database
-	cat << EOF > $tmp
-USE mysql;
-FLUSH PRIVILEGES;
-
-ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ADMIN_PASS';
-CREATE DATABASE $MARIADB_DATABASE_NAME;
-CREATE USER '$MARIADB_USER'@'%' IDENTIFIED by '$MARIADB_PASS';
-GRANT ALL PRIVILEGES ON $MARIADB_DATABASE_NAME.* TO '$MARIADB_USER'@'%';
-FLUSH PRIVILEGES;
+cat << EOF > $tmp
+	USE mysql;
+	FLUSH PRIVILEGES;
+	ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ADMIN_PASS';
+	CREATE DATABASE $MARIADB_DATABASE_NAME;
+	CREATE USER '$MARIADB_USER'@'%' IDENTIFIED by '$MARIADB_PASS';
+	GRANT ALL PRIVILEGES ON $MARIADB_DATABASE_NAME.* TO '$MARIADB_USER'@'%';
+	FLUSH PRIVILEGES;
 EOF
 
 	/usr/bin/mysqld --user=mysql --bootstrap < $tmp
