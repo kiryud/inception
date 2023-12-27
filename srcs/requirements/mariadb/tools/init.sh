@@ -44,5 +44,5 @@ rc-service mariadb stop
 #	/usr/bin/mysqld --user=mysql --bootstrap < $tmp
 #	rm -f $tmp
 #fi
-#
-#exec /usr/bin/mysqld --user=mysql --console
+
+exec /usr/bin/mysqld 
