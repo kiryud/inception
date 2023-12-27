@@ -13,9 +13,7 @@ if [ ! -f wp-config.php ]; then
 	--dbuser=$MARIADB_USER \
 	--dbpass=$MARIADB_PASS  \
 	--dbhost=mariadb
-fi
 
-if ! wp core is-installed; then
 	wp core install \
 	--url=$DOMAIN_NAME \
 	--title=$WORDPRESS_TITLE \
