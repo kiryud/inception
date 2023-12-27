@@ -7,15 +7,13 @@ then
 
 	tmp=".tmp_init_db.sql"
 
-	touch $tmp
-
-	if [ ! -f "$tmp" ]
+	if [ -f "$tmp" ]
 	then
 		return 1
 	fi
 
 cat << EOF > $tmp
-	USE mysql;
+	USE mysql; 
 	FLUSH PRIVILEGES;
 	ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ADMIN_PASS';
 	CREATE DATABASE $MARIADB_DATABASE_NAME;
