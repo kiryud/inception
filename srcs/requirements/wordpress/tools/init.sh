@@ -8,9 +8,8 @@ echo "listen.group = www-data" >> /etc/php81/php-fpm.d/www.conf
 
 cd /var/www/html
 
-if [ ! -f "wp-config.php" ]; then
-	wp core config --force \
-	--skip-check \
+if [ ! -f wp-config.php ]; then
+	wp core config \
 	--dbname=$MARIADB_DATABASE_NAME \
 	--dbuser=$MARIADB_USER \
 	--dbpass=$MARIADB_PASS  \
