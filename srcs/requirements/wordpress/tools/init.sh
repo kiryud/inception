@@ -6,7 +6,7 @@ echo "gruop = www-data" >> /etc/php81/php-fpm.d/www.conf
 echo "listen.owner = www-data" >> /etc/php81/php-fpm.d/www.conf
 echo "listen.group = www-data" >> /etc/php81/php-fpm.d/www.conf
 
-
+cd /var/www/html
 
 if [ ! -f "wp-config.php" ]; then
 	wp core config --force \
