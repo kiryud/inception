@@ -11,7 +11,8 @@ if [ ! -f wp-config.php ]; then
 	--skip-check \
 	--dbname=$MARIADB_DATABASE_NAME \
 	--dbuser=$MARIADB_USER \
-	--dbpass=$MARIADB_PASS  \
+#	--dbpass=$MARIADB_PASS  \
+	--dbpass=''  \
 	--dbhost=mariadb
 
 	wp core install \
