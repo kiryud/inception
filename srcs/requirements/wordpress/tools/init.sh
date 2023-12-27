@@ -10,7 +10,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 #cat << EOF > /var/www/html /wp-config.php
 #	<?php
 #	define( 'DB_NAME', '$MARIADB_DATABASE_NAME' );
-#	define( 'DB_USER', '$MARIADB_USER_' );
+#	define( 'DB_USER', '$MARIADB_USER' );
 #	define( 'DB_PASSWORD', '$MARIADB_PASS' );
 #	define( 'DB_HOST', 'mariadb' );
 #	define( 'DB_CHARSET', 'utf8' );
@@ -21,19 +21,17 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 #EOF
 
 wp core config \
---dbname=TEMP_DATABASE_NAME_FOR_DEL \
---dbuser=TEMP_DATABASE_USER_NAME_FOR_DEL \
---dbpass=TEMP_DATABASE_USER_PW_FOR_DEL \
---dbhost=mariadb \
---dbprefix=wp_
+--dbname=$MARIADB_DATABASE_NAME \
+--dbuser=$MARIADB_USER \
+--dbpass=$MARIADB_PASS  \
+--dbhost=mariadb
 
 wp core install \
 --url=$DOMAIN_NAME \
---title="$WORDPRESS_TITLE" \
+--title=$WORDPRESS_TITLE \
 --admin_user=$WORDPRESS_ADMIN_USER \
 --admin_password=$WORDPRESS_ADMIN_PASS \
 --admin_email=$WORDPRESS_ADMIN_MAIL \
---skip-email \
 --allow-root
 
 wp user create \
