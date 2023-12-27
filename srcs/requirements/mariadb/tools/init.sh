@@ -5,7 +5,9 @@ then
 	chown -R mysql:mysql /var/lib/mysql
 	mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
 
-	tmp=`.tmp_init_db.sql`
+	tmp=".tmp_init_db.sql"
+
+	touch $tmp
 
 	if [ ! -f "$tmp" ]
 	then
