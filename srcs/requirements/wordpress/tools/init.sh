@@ -6,8 +6,8 @@ echo "gruop = www-data" >> /etc/php81/php-fpm.d/www.conf
 echo "listen.owner = www-data" >> /etc/php81/php-fpm.d/www.conf
 echo "listen.group = www-data" >> /etc/php81/php-fpm.d/www.conf
 
-if [ ! -f "./wp-config.php" ]; then
-cat << EOF > ./wp-config.php
+if [ ! -f "/var/www/html/wp-config.php" ]; then
+cat << EOF > /var/www/html /wp-config.php
 	<?php
 	define( 'DB_NAME', '$MARIADB_DATABASE_NAME' );
 	define( 'DB_USER', '$MARIADB_USER_' );
