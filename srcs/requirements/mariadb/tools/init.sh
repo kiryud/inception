@@ -7,7 +7,7 @@ openrc default
 rc-service mariadb start
 
 mariadbd    --user=mysql            \
-            --datadir=/var/lib/mysql\
+            --datadir=/var/lib/mysql \
             --bootstrap << EOF
     FLUSH PRIVILEGES;
     CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
