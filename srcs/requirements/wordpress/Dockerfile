@@ -4,6 +4,8 @@ RUN apk update && apk upgrade && apk add --no-cache \
 	php81 \
 	php81-fpm \
 	php81-iconv \
+	php81-tokenizer \
+	php81-curl \
  	php81-phar \
 	php81-mysqli \
 	mariadb-client \
@@ -30,5 +32,5 @@ RUN	chmod +x /var/www/html/init_wp_config_file.sh
 WORKDIR /var/www/html
 
 
-#CMD ["sh", "/var/www/html/init_wp_config_file.sh"]
-CMD ["/usr/sbin/php-fpm81", "-F"]
+CMD ["sh", "/var/www/html/init_wp_config_file.sh"]
+#CMD ["/usr/sbin/php-fpm81", "-F"]

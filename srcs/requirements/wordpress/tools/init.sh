@@ -6,26 +6,18 @@ echo "gruop = www-data" >> /etc/php81/php-fpm.d/www.conf
 echo "listen.owner = www-data" >> /etc/php81/php-fpm.d/www.conf
 echo "listen.group = www-data" >> /etc/php81/php-fpm.d/www.conf
 
-if [ ! -f "/var/www/html/wp-config.php" ]; then
-#cat << EOF > /var/www/html /wp-config.php
-#	<?php
-#	define( 'DB_NAME', '$MARIADB_DATABASE_NAME' );
-#	define( 'DB_USER', '$MARIADB_USER' );
-#	define( 'DB_PASSWORD', '$MARIADB_PASS' );
-#	define( 'DB_HOST', 'mariadb' );
-#	define( 'DB_CHARSET', 'utf8' );
-#	define( 'DB_COLLATE', '' );
-#	$table_prefix = 'wp_';
-#
-#	define( 'WP_SITEURL', '$DOMAIN_NAME' );
-#EOF
 
-wp core config \
---dbname=$MARIADB_DATABASE_NAME \
---dbuser=$MARIADB_USER \
---dbpass=$MARIADB_PASS  \
---dbhost=mariadb
 
+if [ ! -f "wp-config.php" ]; then
+	wp core config --force \
+	--skip-check \
+	--dbname=$MARIADB_DATABASE_NAME \
+	--dbuser=$MARIADB_USER \
+	--dbpass=$MARIADB_PASS  \
+	--dbhost=mariadb
+fi
+
+if ! wp core is-installed; then
 wp core install \
 --url=$DOMAIN_NAME \
 --title=$WORDPRESS_TITLE \
@@ -42,5 +34,8 @@ $WORDPRESS_MAIL \
 --allow-root
 
 fi
+
+wp core update-db
+wp plugin update --all
 
 /usr/sbin/php-fpm81 -F
