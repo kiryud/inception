@@ -17,6 +17,8 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ADMIN_PASS';
 FLUSH PRIVILEGES;
 EOF
 
+echo $MARIADB_PASS
+
 mysql -u root < init.sql
 
 rc-service mariadb stop 
