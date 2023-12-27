@@ -6,9 +6,7 @@ openrc default
 
 rc-service mariadb start
 
-mariadbd    --user=mysql            \
-            --datadir=/var/lib/mysql \
-            --bootstrap << EOF
+mariadbd --bootstrap << EOF
     FLUSH PRIVILEGES;
     CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
     SET PASSWORD FOR root@localhost = PASSWORD('$MYSQL_ROOT_PASSWORD');
@@ -21,6 +19,17 @@ mariadbd    --user=mysql            \
     SET PASSWORD FOR $MYSQL_USER_ID@'%' = PASSWORD('$MYSQL_USER_PASSWORD');
     GRANT ALL ON $MYSQL_DATABASE.* TO $MYSQL_USER_ID@'%' WITH GRANT OPTION;
 EOF
+
+#cat << EOF > init.sql
+#FLUSH PRIVILEGES;
+#CREATE DATABASE $MARIADB_DATABASE_NAME;
+#CREATE USER '$MARIADB_USER'@'%' IDENTIFIED by '$MARIADB_PASS';
+#SET PASSWORD FOR $MARIADB_USER@'%' = PASSWORD('$MARIADB_PASS');
+#GRANT ALL PRIVILEGES ON $MARIADB_DATABASE_NAME.* TO '$MARIADB_USER'@'%';
+#ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ADMIN_PASS';
+#FLUSH PRIVILEGES;
+#EOF
+#mysql -u root < init.sql
 
 rc-service mariadb stop 
 
