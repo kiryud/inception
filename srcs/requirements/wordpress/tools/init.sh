@@ -13,7 +13,7 @@ if [ ! -f wp-config.php ]; then
 	--skip-check \
 	--dbname=$MARIADB_DATABASE_NAME \
 	--dbuser=$MARIADB_USER \
-	--dbpass=''  \
+	--dbpass=$MARIADB_PASS  \
 	--dbhost=mariadb
 fi
 
