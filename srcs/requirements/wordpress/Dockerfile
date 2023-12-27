@@ -27,5 +27,5 @@ RUN	chmod +x /var/www/html/init_wp_config_file.sh
 
 WORKDIR /var/www/html
 
-# ENTRYPOINT [ "/init_wp_config_file.sh" ]
+ENTRYPOINT [ "./init_wp_config_file.sh" ]
 CMD ["/usr/sbin/php-fpm81", "-F"]
