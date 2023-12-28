@@ -1,11 +1,11 @@
 #! /bin/sh
 
-openrc default
+#openrc default
 
 mariadb-install-db --datadir=/var/lib/mysql
 
-rc-service mariadb setup
-rc-service mariadb start
+#rc-service mariadb setup
+#rc-service mariadb start
 
 #mysql -e "FLUSH PRIVILEGES;
 #    CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY '$MARIADB_ADMIN_PASS';
@@ -48,8 +48,8 @@ EOF
 #EOF
 #mysql -u root < init.sql
 
-rc-service mariadb restart
+#rc-service mariadb restart
 
-rc-service mariadb stop
+#rc-service mariadb stop
 
 exec /usr/bin/mariadbd 
