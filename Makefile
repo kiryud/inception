@@ -17,7 +17,7 @@ ps:
 
 
 up: volume
-	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
+	sudo docker-compose -f ./srcs/docker-compose.yml up --build
 
 build:
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
