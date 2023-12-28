@@ -2,7 +2,7 @@
 
 openrc default
 
-mariadb-install-db
+mariadb-install-db 
 
 rc-service mariadb start
 
@@ -35,4 +35,4 @@ EOF
 
 rc-service mariadb stop 
 
-exec /usr/bin/mysqld 
+exec /usr/bin/mariadbd 
