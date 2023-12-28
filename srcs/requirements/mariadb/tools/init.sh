@@ -2,7 +2,7 @@
 
 openrc default
 
-/etc/init.d/mariadb setup
+mariadb-install-db
 
 rc-service mariadb start
 
