@@ -35,7 +35,7 @@ if ! wp core is-installed; then
 
 fi
 
-wp core update-db
-wp plugin update --all
+# wp core update-db
+# wp plugin update --all
 
-/usr/sbin/php-fpm81 -F
+exec /usr/sbin/php-fpm81 -F
