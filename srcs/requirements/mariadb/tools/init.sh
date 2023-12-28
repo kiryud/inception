@@ -7,6 +7,12 @@ openrc default
 rc-service mariadb setup
 rc-service mariadb start
 mysql_secure_installation
+echo "Y";
+echo "n";
+echo "Y";
+echo "Y";
+echo "Y";
+echo "Y";
 
 mysql -e "FLUSH PRIVILEGES;
     CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY '$MARIADB_ADMIN_PASS';
