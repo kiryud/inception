@@ -6,7 +6,6 @@ openrc default
 
 rc-service mariadb setup
 rc-service mariadb start
-mariadb-install-db --datadir=/var/lib/mysql
 
 mysql -e "FLUSH PRIVILEGES;
     CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY '$MARIADB_ADMIN_PASS';
