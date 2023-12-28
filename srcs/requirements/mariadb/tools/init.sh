@@ -1,10 +1,10 @@
 #! /bin/sh
 
-openrc default
+#openrc default
 
-mariadb-install-db 
+mariadb-install-db --datadir=/var/lib/mysql
 
-rc-service mariadb start
+#rc-service mariadb start
 
 mariadbd --user=mysql \
         --datadir=/var/lib/mysql \
@@ -20,10 +20,7 @@ mariadbd --user=mysql \
     CREATE USER IF NOT EXISTS $MARIADB_USER@'%' IDENTIFIED BY '$MARIADB_PASS';
     SET PASSWORD FOR $MARIADB_USER@'%' = PASSWORD('$MARIADB_PASS');
     GRANT ALL ON $MARIADB_DATABASE_NAME.* TO $MARIADB_USER@'%' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;
 EOF
-
-touch asdfgqwert
 
 #cat << EOF > init.sql
 #FLUSH PRIVILEGES;
@@ -36,6 +33,6 @@ touch asdfgqwert
 #EOF
 #mysql -u root < init.sql
 
-rc-service mariadb stop 
+#rc-service mariadb stop 
 
 exec /usr/bin/mariadbd 
