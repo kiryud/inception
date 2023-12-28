@@ -1,13 +1,15 @@
 #! /bin/sh
 
-openrc default
+#openrc default
 
-#mariadb-install-db --datadir=/var/lib/mysql
+mariadb-install-db --datadir=/var/lib/mysql
 
-rc-service mariadb setup
-rc-service mariadb start
+#rc-service mariadb start
 
-mysql -e "FLUSH PRIVILEGES;
+mariadbd --user=mysql \
+        --datadir=/var/lib/mysql \
+        --bootstrap << EOF
+    FLUSH PRIVILEGES;
     CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY '$MARIADB_ADMIN_PASS';
     SET PASSWORD FOR root@localhost = PASSWORD('$MARIADB_ADMIN_PASS');
     GRANT ALL ON *.* TO root@localhost WITH GRANT OPTION;
@@ -18,24 +20,8 @@ mysql -e "FLUSH PRIVILEGES;
     CREATE USER IF NOT EXISTS $MARIADB_USER@'%' IDENTIFIED BY '$MARIADB_PASS';
     SET PASSWORD FOR $MARIADB_USER@'%' = PASSWORD('$MARIADB_PASS');
     GRANT ALL ON $MARIADB_DATABASE_NAME.* TO $MARIADB_USER@'%' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;"
-
-#mariadbd --user=mysql \
-#        --datadir=/var/lib/mysql \
-#        --bootstrap << EOF
-#    FLUSH PRIVILEGES;
-#    CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY '$MARIADB_ADMIN_PASS';
-#    SET PASSWORD FOR root@localhost = PASSWORD('$MARIADB_ADMIN_PASS');
-#    GRANT ALL ON *.* TO root@localhost WITH GRANT OPTION;
-#    CREATE USER IF NOT EXISTS root@'%' IDENTIFIED BY '$MARIADB_ADMIN_PASS';
-#    SET PASSWORD FOR root@'%' = PASSWORD('$MARIADB_ADMIN_PASS');
-#    GRANT ALL ON *.* TO root@'%' WITH GRANT OPTION;
-#    CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE_NAME;
-#    CREATE USER IF NOT EXISTS $MARIADB_USER@'%' IDENTIFIED BY '$MARIADB_PASS';
-#    SET PASSWORD FOR $MARIADB_USER@'%' = PASSWORD('$MARIADB_PASS');
-#    GRANT ALL ON $MARIADB_DATABASE_NAME.* TO $MARIADB_USER@'%' WITH GRANT OPTION;
-#    FLUSH PRIVILEGES;
-#EOF
+    FLUSH PRIVILEGES;
+EOF
 
 #cat << EOF > init.sql
 #FLUSH PRIVILEGES;
@@ -48,8 +34,6 @@ mysql -e "FLUSH PRIVILEGES;
 #EOF
 #mysql -u root < init.sql
 
-rc-service mariadb restart
-
-rc-service mariadb stop
+#rc-service mariadb stop 
 
 exec /usr/bin/mariadbd 
